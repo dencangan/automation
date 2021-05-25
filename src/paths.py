@@ -4,18 +4,17 @@ import sys
 import os
 
 
-def get_env_values(env_key=None):
+def get_env_values(env_key: str = None):
+    """Check os environment values."""
     envs = dict(os.environ)
-
     if env_key is None:
         return envs
-
     assert env_key in list(envs), f"{env_key} is not an acceptable environment key. Acceptable keys are {list(envs)}"
     value = envs[env_key]
     return value
 
 
-def append_sys_path(path="../"):
+def append_sys_path(path: str = "../"):
     """
     Function to append package directory to sys path - so a module can be from the command line.
 

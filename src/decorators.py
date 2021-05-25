@@ -1,5 +1,7 @@
 """
 Decorators are wrappers to modify the behaviour of functions and classes. To call decorators, use @decorator.
+
+In Python, parameters after * are keyword-only parameters and must be explicitly named when calling the function.
 """
 
 from time import time
@@ -7,7 +9,9 @@ import warnings
 import functools
 
 
-def timer(_func=None, *, print_msg=None):
+def timer(_func=None,
+          *,
+          print_msg=None):
     """
     Allows one to specify print_msg if need be. Useful for timing builtin methods.
 
@@ -22,7 +26,6 @@ def timer(_func=None, *, print_msg=None):
             time_start = time()
             result = func(*args, **kwargs)
             time_end = time()
-
             print(f"{func.__name__ if print_msg is None else print_msg} took {(time_end - time_start):2.2f} seconds.")
             return result
         return wrapper_timer
@@ -33,7 +36,9 @@ def timer(_func=None, *, print_msg=None):
         return decorator_timer(_func)
 
 
-def deprecated(_func=None, *, print_msg=None):
+def deprecated(_func=None,
+               *,
+               print_msg=None):
     """
     This is a decorator which can be used to mark functions as deprecated.
     It will result in a warning being emitted when the function is used.
@@ -45,7 +50,6 @@ def deprecated(_func=None, *, print_msg=None):
     """
 
     def decorator_deprecated(func):
-
         @functools.wraps(func)
         def wrapper_decorator(*args, **kwargs):
             with warnings.catch_warnings():
@@ -64,5 +68,6 @@ def deprecated(_func=None, *, print_msg=None):
         return decorator_deprecated
     else:
         return decorator_deprecated(_func)
+
 
 

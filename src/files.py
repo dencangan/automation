@@ -1,4 +1,6 @@
-"""File handling type functions."""
+"""
+File handling type functions.
+"""
 
 import os
 import shutil
@@ -7,15 +9,16 @@ from typing import Union
 from datetime import datetime
 
 
-def arrange_files(folder_directory: str, misc_folder_name: str = "others") -> None:
+def arrange_files(folder_directory: str,
+                  misc_folder_name: str = "others") -> None:
     """
-    Arrange files accordingly to their extension type
+    Arrange files and put them in folders according to their extension type.
 
     Parameters
     ----------
     folder_directory
         Folder to arrange files.
-    misc_folder_name : str
+    misc_folder_name
         Folder to store anything else without file extension, creates default "others" folder.
 
     """
@@ -55,7 +58,8 @@ def arrange_files(folder_directory: str, misc_folder_name: str = "others") -> No
         shutil.move(os.path.join(folder_directory, misc_file), os.path.join(folder_directory, "others"))
 
 
-def list_file_exts(folder_directory: str, ext: str = "exe") -> list:
+def list_file_exts(folder_directory: str,
+                   ext: str = "exe") -> list:
     """Returns a list of files of specified extension."""
     return [os.path.join(folder_directory, x) for x in os.listdir(folder_directory) if x.endswith(ext)]
 
@@ -82,7 +86,9 @@ def check_last_modified(file: Union[list, str]):
         print(get_file_time(f))
 
 
-def copy_move(source_dir: str, des_dir: str, is_copy: bool = True) -> None:
+def copy_move(source_dir: str,
+              des_dir: str,
+              is_copy: bool = True) -> None:
     """
     Copy or move files
 
